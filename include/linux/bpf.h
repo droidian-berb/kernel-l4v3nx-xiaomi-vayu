@@ -70,6 +70,8 @@ struct bpf_map {
 	atomic_t refcnt;
 	atomic_t usercnt;
 	struct work_struct work;
+	struct bpf_map *inner_map_meta;
+	u8 name[BPF_OBJ_NAME_LEN];
 };
 
 /* function argument constraints */
