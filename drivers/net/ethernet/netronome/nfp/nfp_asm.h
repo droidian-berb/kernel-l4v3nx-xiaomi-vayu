@@ -91,15 +91,15 @@ enum br_ctx_signal_state {
 	BR_CSS_NONE = 2,
 };
 
-#define OP_BBYTE_BASE	0x0c800000000ULL
-#define OP_BB_A_SRC	0x000000000ffULL
-#define OP_BB_BYTE	0x00000000300ULL
-#define OP_BB_B_SRC	0x0000003fc00ULL
-#define OP_BB_I8	0x00000040000ULL
-#define OP_BB_EQ	0x00000080000ULL
-#define OP_BB_DEFBR	0x00000300000ULL
-#define OP_BB_ADDR_LO	0x007ffc00000ULL
-#define OP_BB_ADDR_HI	0x10000000000ULL
+#define OP_BBYTE_BASE		0x0c800000000ULL
+#define OP_BB_A_SRC		0x000000000ffULL
+#define OP_BB_BYTE		0x00000000300ULL
+#define OP_BB_B_SRC		0x0000003fc00ULL
+#define OP_BB_I8		0x00000040000ULL
+#define OP_BB_EQ		0x00000080000ULL
+#define OP_BB_DEFBR		0x00000300000ULL
+#define OP_BB_ADDR_LO		0x007ffc00000ULL
+#define OP_BB_ADDR_HI		0x10000000000ULL
 
 #define OP_BALU_BASE	0x0e800000000ULL
 #define OP_BA_A_SRC	0x000000003ffULL
@@ -107,14 +107,16 @@ enum br_ctx_signal_state {
 #define OP_BA_DEFBR	0x00000300000ULL
 #define OP_BA_ADDR_HI	0x0007fc00000ULL
 
-#define OP_IMMED_A_SRC	0x000000003ffULL
-#define OP_IMMED_B_SRC	0x000000ffc00ULL
-#define OP_IMMED_IMM	0x0000ff00000ULL
-#define OP_IMMED_WIDTH	0x00060000000ULL
-#define OP_IMMED_INV	0x00080000000ULL
-#define OP_IMMED_SHIFT	0x00600000000ULL
-#define OP_IMMED_BASE	0x0f000000000ULL
-#define OP_IMMED_WR_AB	0x20000000000ULL
+#define OP_IMMED_A_SRC		0x000000003ffULL
+#define OP_IMMED_B_SRC		0x000000ffc00ULL
+#define OP_IMMED_IMM		0x0000ff00000ULL
+#define OP_IMMED_WIDTH		0x00060000000ULL
+#define OP_IMMED_INV		0x00080000000ULL
+#define OP_IMMED_SHIFT		0x00600000000ULL
+#define OP_IMMED_BASE		0x0f000000000ULL
+#define OP_IMMED_WR_AB		0x20000000000ULL
+#define OP_IMMED_SRC_LMEXTN	0x40000000000ULL
+#define OP_IMMED_DST_LMEXTN	0x80000000000ULL
 
 enum immed_width {
 	IMMED_WIDTH_ALL = 0,
@@ -128,17 +130,19 @@ enum immed_shift {
 	IMMED_SHIFT_2B = 2,
 };
 
-#define OP_SHF_BASE	0x08000000000ULL
-#define OP_SHF_A_SRC	0x000000000ffULL
-#define OP_SHF_SC	0x00000000300ULL
-#define OP_SHF_B_SRC	0x0000003fc00ULL
-#define OP_SHF_I8	0x00000040000ULL
-#define OP_SHF_SW	0x00000080000ULL
-#define OP_SHF_DST	0x0000ff00000ULL
-#define OP_SHF_SHIFT	0x001f0000000ULL
-#define OP_SHF_OP	0x00e00000000ULL
-#define OP_SHF_DST_AB	0x01000000000ULL
-#define OP_SHF_WR_AB	0x20000000000ULL
+#define OP_SHF_BASE		0x08000000000ULL
+#define OP_SHF_A_SRC		0x000000000ffULL
+#define OP_SHF_SC		0x00000000300ULL
+#define OP_SHF_B_SRC		0x0000003fc00ULL
+#define OP_SHF_I8		0x00000040000ULL
+#define OP_SHF_SW		0x00000080000ULL
+#define OP_SHF_DST		0x0000ff00000ULL
+#define OP_SHF_SHIFT		0x001f0000000ULL
+#define OP_SHF_OP		0x00e00000000ULL
+#define OP_SHF_DST_AB		0x01000000000ULL
+#define OP_SHF_WR_AB		0x20000000000ULL
+#define OP_SHF_SRC_LMEXTN	0x40000000000ULL
+#define OP_SHF_DST_LMEXTN	0x80000000000ULL
 
 enum shf_op {
 	SHF_OP_NONE = 0,
@@ -153,14 +157,16 @@ enum shf_sc {
 	SHF_SC_R_DSHF = 3,
 };
 
-#define OP_ALU_A_SRC	0x000000003ffULL
-#define OP_ALU_B_SRC	0x000000ffc00ULL
-#define OP_ALU_DST	0x0003ff00000ULL
-#define OP_ALU_SW	0x00040000000ULL
-#define OP_ALU_OP	0x00f80000000ULL
-#define OP_ALU_DST_AB	0x01000000000ULL
-#define OP_ALU_BASE	0x0a000000000ULL
-#define OP_ALU_WR_AB	0x20000000000ULL
+#define OP_ALU_A_SRC		0x000000003ffULL
+#define OP_ALU_B_SRC		0x000000ffc00ULL
+#define OP_ALU_DST		0x0003ff00000ULL
+#define OP_ALU_SW		0x00040000000ULL
+#define OP_ALU_OP		0x00f80000000ULL
+#define OP_ALU_DST_AB		0x01000000000ULL
+#define OP_ALU_BASE		0x0a000000000ULL
+#define OP_ALU_WR_AB		0x20000000000ULL
+#define OP_ALU_SRC_LMEXTN	0x40000000000ULL
+#define OP_ALU_DST_LMEXTN	0x80000000000ULL
 
 enum alu_op {
 	ALU_OP_NONE	= 0x00,
@@ -179,16 +185,18 @@ enum alu_dst_ab {
 	ALU_DST_B = 1,
 };
 
-#define OP_LDF_BASE	0x0c000000000ULL
-#define OP_LDF_A_SRC	0x000000000ffULL
-#define OP_LDF_SC	0x00000000300ULL
-#define OP_LDF_B_SRC	0x0000003fc00ULL
-#define OP_LDF_I8	0x00000040000ULL
-#define OP_LDF_SW	0x00000080000ULL
-#define OP_LDF_ZF	0x00000100000ULL
-#define OP_LDF_BMASK	0x0000f000000ULL
-#define OP_LDF_SHF	0x001f0000000ULL
-#define OP_LDF_WR_AB	0x20000000000ULL
+#define OP_LDF_BASE		0x0c000000000ULL
+#define OP_LDF_A_SRC		0x000000000ffULL
+#define OP_LDF_SC		0x00000000300ULL
+#define OP_LDF_B_SRC		0x0000003fc00ULL
+#define OP_LDF_I8		0x00000040000ULL
+#define OP_LDF_SW		0x00000080000ULL
+#define OP_LDF_ZF		0x00000100000ULL
+#define OP_LDF_BMASK		0x0000f000000ULL
+#define OP_LDF_SHF		0x001f0000000ULL
+#define OP_LDF_WR_AB		0x20000000000ULL
+#define OP_LDF_SRC_LMEXTN	0x40000000000ULL
+#define OP_LDF_DST_LMEXTN	0x80000000000ULL
 
 #define OP_CMD_A_SRC	 0x000000000ffULL
 #define OP_CMD_CTX	 0x00000000300ULL
@@ -226,11 +234,13 @@ enum cmd_ctx_swap {
 	CMD_CTX_NO_SWAP = 3,
 };
 
-#define OP_LCSR_BASE	0x0fc00000000ULL
-#define OP_LCSR_A_SRC	0x000000003ffULL
-#define OP_LCSR_B_SRC	0x000000ffc00ULL
-#define OP_LCSR_WRITE	0x00000200000ULL
-#define OP_LCSR_ADDR	0x001ffc00000ULL
+#define OP_LCSR_BASE		0x0fc00000000ULL
+#define OP_LCSR_A_SRC		0x000000003ffULL
+#define OP_LCSR_B_SRC		0x000000ffc00ULL
+#define OP_LCSR_WRITE		0x00000200000ULL
+#define OP_LCSR_ADDR		0x001ffc00000ULL
+#define OP_LCSR_SRC_LMEXTN	0x40000000000ULL
+#define OP_LCSR_DST_LMEXTN	0x80000000000ULL
 
 enum lcsr_wr_src {
 	LCSR_WR_AREG,
@@ -243,7 +253,9 @@ enum lcsr_wr_src {
 
 /* Software register representation, independent of operand type */
 #define NN_REG_TYPE	GENMASK(31, 24)
-#define NN_REG_LM_IDX	BIT(22)
+#define NN_REG_LM_IDX	GENMASK(23, 22)
+#define NN_REG_LM_IDX_HI	BIT(23)
+#define NN_REG_LM_IDX_LO	BIT(22)
 #define NN_REG_LM_MOD	GENMASK(21, 20)
 #define NN_REG_VAL	GENMASK(7, 0)
 
@@ -285,7 +297,7 @@ static inline swreg __enc_swreg(u16 id, u8 type)
 
 static inline swreg __enc_swreg_lm(u8 id, enum nfp_bpf_lm_mode mode, u8 off)
 {
-	WARN_ON(id > 1 || (off && mode != NN_LM_MOD_NONE));
+	WARN_ON(id > 3 || (off && mode != NN_LM_MOD_NONE));
 
 	return (__force swreg)(FIELD_PREP(NN_REG_TYPE, NN_REG_LMEM) |
 			       FIELD_PREP(NN_REG_LM_IDX, id) |
@@ -310,7 +322,12 @@ static inline u16 swreg_value(swreg reg)
 
 static inline bool swreg_lm_idx(swreg reg)
 {
-	return FIELD_GET(NN_REG_LM_IDX, swreg_raw(reg));
+	return FIELD_GET(NN_REG_LM_IDX_LO, swreg_raw(reg));
+}
+
+static inline bool swreg_lmextn(swreg reg)
+{
+	return FIELD_GET(NN_REG_LM_IDX_HI, swreg_raw(reg));
 }
 
 static inline enum nfp_bpf_lm_mode swreg_lm_mode(swreg reg)
@@ -324,6 +341,8 @@ struct nfp_insn_ur_regs {
 	u16 areg, breg;
 	bool swap;
 	bool wr_both;
+	bool dst_lmextn;
+	bool src_lmextn;
 };
 
 struct nfp_insn_re_regs {
@@ -333,6 +352,8 @@ struct nfp_insn_re_regs {
 	bool swap;
 	bool wr_both;
 	bool i8;
+	bool dst_lmextn;
+	bool src_lmextn;
 };
 
 int swreg_to_unrestricted(swreg dst, swreg lreg, swreg rreg,
