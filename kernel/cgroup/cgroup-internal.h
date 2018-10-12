@@ -123,6 +123,9 @@ extern spinlock_t css_set_lock;
 extern struct cgroup_subsys *cgroup_subsys[];
 extern struct list_head cgroup_roots;
 
+extern bool cgroup_debug;
+extern void __init enable_debug_cgroup(void);
+
 /* iterate across the hierarchies */
 #define for_each_root(root)						\
 	list_for_each_entry((root), &cgroup_roots, root_list)
