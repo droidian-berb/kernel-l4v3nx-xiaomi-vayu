@@ -294,6 +294,12 @@ fn_patch_kernel_snippet_extra_frags_extended() {
 +    }" "${path}/${file}"
 }
 
+
+fn_patch_kernel_snippet_kernel_name_developer() {
+    ## Add the previous kernel developer at the KERNEL_RELEASE's end
+    sed -i "s/^KERNEL_RELEASE = \$(KERNEL_BASE_VERSION)-\$(DEVICE_VENDOR)-\$(DEVICE_MODEL)/KERNEL_RELEASE = \$(KERNEL_BASE_VERSION)-\$(DEVICE_VENDOR)-\$(DEVICE_MODEL)-\$(KERNEL_DEVELOPER_NAME)/g" /usr/share/linux-packaging-snippets/kernel-snippet.mk
+}
+
 #fn_enable_ccache
 
 ## Custom lineage build tools
@@ -308,6 +314,8 @@ if [ "$1" == "releng" ]; then
     ## Patch kernel-snippet with
        # extended EXTRA_FRAGMENTS
     fn_patch_kernel_snippet_extra_frags_extended
+       # Add kernel developer to kernel name's end
+    fn_patch_kernel_snippet_kernel_name_developer
     ## Use an unofficial kernel-snippet.
     # wget -O /usr/share/linux-packaging-snippets/kernel-snippet.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/droidian-extended/kernel-snippet.mk
     #cp /buildd/sources/debian/kernel-snippet.mk /usr/share/linux-packaging-snippets/
