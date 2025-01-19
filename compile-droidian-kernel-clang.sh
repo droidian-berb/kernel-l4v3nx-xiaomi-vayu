@@ -50,8 +50,14 @@ ROOTDIR="/opt"
 export ARCH=arm64
 
 fn_install_prereqs() {
- apt-get install linux-packaging-snippets bc bison build-essential ccache curl flex git git-lfs gnupg gperf imagemagick libelf-dev libncurses5-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python3 python-is-python3
+apt-get update
+apt-get install linux-packaging-snippets bc bison build-essential ccache curl flex git git-lfs gnupg gperf imagemagick libelf-dev libncurses5-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python3 python-is-python3
 # libsdl1.2-dev
+}
+
+fn_install_prereqs_droidian() {
+    apt-get update && apt-get install -y --no-install-recommends linux-packaging-snippets
+    ## releng-tools: craches on arm64 docker host
 }
 
 fn_install_prereqs_droidian_kernel_info() {
@@ -272,7 +278,6 @@ fn_build_kernel_droidian_releng() {
     RELENG_HOST_ARCH=${ARCH} releng-build-package
 }
 
-fn_install_prereqs
 #fn_enable_ccache
 
 ## Custom lineage build tools
@@ -280,7 +285,9 @@ fn_install_prereqs
    ## Need to define paths in kernel-info.mk
 
 if [ "$1" == "releng" ]; then
-    #
+    #fn_install_prereqs
+    ## Install/Upgrade Droidian build tools
+    # fn_install_prereqs_droidian
     #
     ## Use an unofficial kernel-snippet.
     wget -O /usr/share/linux-packaging-snippets/kernel-snippet.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/droidian-extended/kernel-snippet.mk
@@ -291,9 +298,9 @@ if [ "$1" == "releng" ]; then
 #    fn_install_custom_clang
     fn_build_kernel_droidian_releng
     #
-    #
+#    sed -i 's/CROSS_COMPILE_ARM32/CROSS_COMPILE_COMPAT/g' /usr/share/linux-packaging-snippets/kernel-snippet.mk   #
 elif [ "$1" == "clang" ]; then
-    #
+#fn_install_prereqs
     #
 #    fn_install_prereqs_droidian_kernel_info
     fn_clang_manual_vars
