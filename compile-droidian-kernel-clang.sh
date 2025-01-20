@@ -294,13 +294,13 @@ fn_patch_kernel_snippet_extra_frags_extended() {
     ## Adding more lines
     #    a ${add_line1}
     #    a ${add_line2}
-    is_patched=$(grep "${add_line1}" ${file})
+    is_patched=$(grep "${add_line1}" ${path}/${file})
     [ -n "${is_patched}" ] && return
 
     sed -i "/^${patch_line_reference}$/{
         n;n;
-        a ${add_line1}
         a ""
+        a ${add_line1}
     }" "${path}/${file}"
 }
 
