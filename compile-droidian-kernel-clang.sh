@@ -297,6 +297,21 @@ fn_patch_kernel_snippet_extra_frags_extended() {
     }" "${path}/${file}"
 }
 
+fn_patch_file_arr_line_num_reference() {
+    is_patched=$(grep "${arr_lines_to_add[0]}" "${path}/${file}")
+    [ -n "${is_patched}" ] && echo "skipping" && return
+
+    num_line_reference=$(grep -n "${patch_line_reference}" ${file} | awk -F':' '{print $1}')
+    num_line_start=$((num_line_reference + start_relative))
+    for line in "${arr_lines_to_add[@]}"; do
+        sed -i "${num_line_start}a ${line}" "${path}/${file}"
+        num_line_start=$((num_line_start + 1))
+    done
+    ## Add a blank line after last line
+    sed -i "${num_line_start}a\
+
+    " "${path}/${file}"
+}
 
 fn_patch_kernel_snippet_kernel_name_developer() {
     ## Add the previous kernel developer at the KERNEL_RELEASE's end
