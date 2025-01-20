@@ -286,6 +286,7 @@ fn_kernel_snippets_custom_wget() {
 }
 
 fn_patch_kernel_snippet_extra_frags_extended() {
+    wget -O /usr/share/linux-packaging-snippets/kernel-snippet-extra-fragments-extended.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/refs/heads/feature/extra-frags-extended/kernel-snippet-extra-fragments-extended.mk
     file="kernel-snippet.mk"
     path="/usr/share/linux-packaging-snippets"
     patch_line_reference="ifdef KERNEL_CONFIG_EXTRA_FRAGMENTS"
