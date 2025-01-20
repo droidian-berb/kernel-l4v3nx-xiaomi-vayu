@@ -278,6 +278,13 @@ fn_build_kernel_droidian_releng() {
     RELENG_HOST_ARCH=${ARCH} releng-build-package
 }
 
+fn_kernel_snippets_custom_wget() {
+    ## Use unofficial-berb kernel snippets mods
+    wget -O /usr/share/linux-packaging-snippets/kernel-snippet.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/refs/heads/unofficial-berb-sid/kernel-snippet.mk
+    wget -O /usr/share/linux-packaging-snippets/kernel-snippet-clang-clean-deb-toolchain.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/refs/heads/unofficial-berb-sid/kernel-snippet-clang-clean-deb-toolchain.mk
+    wget -O /usr/share/linux-packaging-snippets/kernel-snippet-clang-versions.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/refs/heads/unofficial-berb-sid/kernel-snippet-clang-versions.mk
+}
+
 fn_patch_kernel_snippet_extra_frags_extended() {
     file="kernel-snippet.mk"
     path="/usr/share/linux-packaging-snippets"
@@ -345,14 +352,15 @@ if [ "$1" == "releng" ]; then
     ## Install/Upgrade Droidian build tools
     # fn_install_prereqs_droidian
     #
+    ## Use unofficial-berb kernel snippets mods
+    fn_kernel_snippets_custom_wget
+    #
     ## Patch kernel-snippet with
        # extended EXTRA_FRAGMENTS
     fn_patch_kernel_snippet_extra_frags_extended
        # Add kernel developer to kernel name's end
     fn_patch_kernel_snippet_kernel_name_developer
-    ## Use an unofficial kernel-snippet.
-    # wget -O /usr/share/linux-packaging-snippets/kernel-snippet.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/droidian-extended/kernel-snippet.mk
-    #cp /buildd/sources/debian/kernel-snippet.mk /usr/share/linux-packaging-snippets/
+    #
 #    sed -i 's/CROSS_COMPILE_ARM32/CROSS_COMPILE_COMPAT/g' /usr/share/linux-packaging-snippets/kernel-snippet.mk
     #
 #   fn_install_prereqs_droidian_kernel_info
