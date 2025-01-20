@@ -316,6 +316,22 @@ fn_patch_file_arr_line_num_reference() {
 fn_patch_kernel_snippet_kernel_name_developer() {
     ## Add the previous kernel developer at the KERNEL_RELEASE's end
     sed -i "s/^KERNEL_RELEASE = \$(KERNEL_BASE_VERSION)-\$(DEVICE_VENDOR)-\$(DEVICE_MODEL)/KERNEL_RELEASE = \$(KERNEL_BASE_VERSION)-\$(DEVICE_VENDOR)-\$(DEVICE_MODEL)-\$(KERNEL_DEVELOPER_NAME)/g" /usr/share/linux-packaging-snippets/kernel-snippet.mk
+    ## Get the control override snippet
+    wget -O /usr/share/linux-packaging-snippets/kernel-snippet-control-override-developer-name.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/refs/heads/feature/developer-in-kernelname-sid/kernel-snippet-control-override-developer-name.mk
+    ## Patch kernel-snippet to include a control
+    ## override snippet for custom kernel name
+    ## start relative: "-" before, "+" after
+    start_relative="-1"
+    patch_line_reference='debian.*control:'
+    file="kernel-snippet.mk"
+    path="/usr/share/linux-packaging-snippets"
+    arr_lines_to_add=(
+        '# control override for enabling kernel developer name in kernel name'
+        'ifdef KERNEL_DEVELOPER_NAME'
+        'include /usr/share/linux-packaging-snippets/kernel-snippet-control-override-developer-name.mk'
+        'endif'
+    )
+    fn_patch_file_arr_line_num_reference
 }
 
 #fn_enable_ccache
