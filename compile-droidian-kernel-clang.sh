@@ -283,15 +283,18 @@ fn_patch_kernel_snippet_extra_frags_extended() {
     path="/usr/share/linux-packaging-snippets"
     patch_line_reference="ifdef KERNEL_CONFIG_EXTRA_FRAGMENTS"
     add_line1="include /usr/share/linux-packaging-snippets/kernel-snippet-extra-fragments-extended.mk"
-
-    ## Sanple adding more lines
-    #sed -i "/${patch_line_reference}/{n;n; a ${add_line1}; a $i{add_line2}; a ...
-    #}" "$file"
-
+    ## Add lines 2 lines (n;n;) after match
+    ## Adding more lines
+    #    a ${add_line1}
+    #    a ${add_line2}
     is_patched=$(grep "${add_line1}" ${file})
     [ -n "${is_patched}" ] && return
-    sed -i "/^${patch_line_reference}$/{n;n; a ${add_line1}
-+    }" "${path}/${file}"
+
+    sed -i "/^${patch_line_reference}$/{
+        n;n;
+        a ${add_line1}
+        a ""
+    }" "${path}/${file}"
 }
 
 
