@@ -308,7 +308,7 @@ fn_patch_file_arr_line_num_reference() {
     is_patched=$(grep "${arr_lines_to_add[0]}" "${path}/${file}")
     [ -n "${is_patched}" ] && echo "skipping" && return
 
-    num_line_reference=$(grep -n "${patch_line_reference}" ${file} | awk -F':' '{print $1}')
+    num_line_reference=$(grep -n "${patch_line_reference}" ${path}/${file} | awk -F':' '{print $1}')
     num_line_start=$((num_line_reference + start_relative))
     for line in "${arr_lines_to_add[@]}"; do
         sed -i "${num_line_start}a ${line}" "${path}/${file}"
