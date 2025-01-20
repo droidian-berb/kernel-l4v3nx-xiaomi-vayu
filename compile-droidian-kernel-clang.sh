@@ -341,7 +341,9 @@ fn_patch_kernel_snippet_kernel_name_developer() {
         'include /usr/share/linux-packaging-snippets/kernel-snippet-control-override-developer-name.mk'
         'endif'
     )
-    fn_patch_file_arr_line_num_reference
+    ## Disable patching kernel-snippet, the snippet
+    ## will be included in debian/rules instead
+    # fn_patch_file_arr_line_num_reference
 }
 
 #fn_enable_ccache

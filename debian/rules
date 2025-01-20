@@ -2,6 +2,8 @@
 
 include /usr/share/linux-packaging-snippets/kernel-snippet.mk
 
+include /usr/share/linux-packaging-snippets/kernel-snippet-control-override-developer-name.mk
+
 %:
 	dh $@
 
