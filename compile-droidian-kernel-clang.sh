@@ -326,6 +326,8 @@ fn_patch_kernel_snippet_kernel_name_developer() {
     sed -i "s/^KERNEL_RELEASE = \$(KERNEL_BASE_VERSION)-\$(DEVICE_VENDOR)-\$(DEVICE_MODEL)/KERNEL_RELEASE = \$(KERNEL_BASE_VERSION)-\$(DEVICE_VENDOR)-\$(DEVICE_MODEL)-\$(KERNEL_DEVELOPER_NAME)/g" /usr/share/linux-packaging-snippets/kernel-snippet.mk
     ## Get the control override snippet
     wget -O /usr/share/linux-packaging-snippets/kernel-snippet-control-override-developer-name.mk https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/refs/heads/feature/developer-in-kernelname-sid/kernel-snippet-control-override-developer-name.mk
+    ## Get control-developer-name.in
+    wget -O /usr/share/linux-packaging-snippets/control-developer-name.in https://raw.githubusercontent.com/droidian-berb/linux-packaging-snippets/refs/heads/feature/developer-in-kernelname-sid/control-developer-name.in
     ## Patch kernel-snippet to include a control
     ## override snippet for custom kernel name
     ## start relative: "-" before, "+" after
