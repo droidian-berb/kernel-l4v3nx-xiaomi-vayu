@@ -46,10 +46,18 @@ trap "rm -f $tmp" 0 1 2 3 15
 
 # Check if we can link to ncurses
 check() {
+        echo "Initial cc var value: ${cc}"
+        if [ -n "$CC" ]; then
+            cc=$(echo "${cc}" | sed "s/^gcc/$CC/g")
+            echo "Patched cc var value: ${cc}"
+        fi
         $cc -x c - -o $tmp 2>/dev/null <<'EOF'
 #include CURSES_LOC
 main() {}
 EOF
+        exitcode=$?
+        echo "Test ncurses exitcode: $exitcoude"
+
 	if [ $? != 0 ]; then
 	    echo " *** Unable to find the ncurses libraries or the"       1>&2
 	    echo " *** required header files."                            1>&2
