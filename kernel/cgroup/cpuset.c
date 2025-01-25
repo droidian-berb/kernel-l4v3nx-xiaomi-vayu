@@ -1274,6 +1274,12 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 	int retval;
 	struct tmpmasks tmp;
 
+	struct tmpmasks {
+		cpumask_var_t addmask;
+		cpumask_var_t delmask;
+		cpumask_var_t new_cpus;
+	};
+
 	/* top_cpuset.cpus_allowed tracks cpu_online_mask; it's read-only */
 	if (cs == &top_cpuset)
 		return -EACCES;
@@ -1307,9 +1313,9 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 	/*
 	 * Use the cpumasks in trialcs for tmpmasks.
 	 */
-	tmp.addmask  = trialcs->subparts_cpus;
-	tmp.delmask  = trialcs->effective_cpus;
-	tmp.new_cpus = trialcs->cpus_allowed;
+	cpumask_copy(tmp.addmask, trialcs->subparts_cpus);
+	cpumask_copy(tmp.delmask, trialcs->effective_cpus);
+	cpumask_copy(tmp.new_cpus, trialcs->cpus_allowed);
 
 	if (cs->partition_root_state) {
 		/* Cpumask of a partition root cannot be empty */
