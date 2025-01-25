@@ -40,6 +40,7 @@
 #include <asm/paravirt.h>
 #endif
 
+#include <linux/sched/cpuacct.h>
 #include "sched.h"
 #include "walt.h"
 #include "../workqueue_internal.h"
