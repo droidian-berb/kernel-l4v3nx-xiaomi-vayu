@@ -2124,11 +2124,6 @@ cpuset_css_alloc(struct cgroup_subsys_state *parent_css)
 	cs->relax_domain_level = -1;
 
 	return &cs->css;
-
-free_requested:
-	free_cpumask_var(cs->cpus_requested);
-free_allowed:
-	free_cpumask_var(cs->cpus_allowed);
 }
 
 static int cpuset_css_online(struct cgroup_subsys_state *css)
