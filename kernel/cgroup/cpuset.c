@@ -543,6 +543,7 @@ static struct cpuset *alloc_trial_cpuset(struct cpuset *cs)
 
 free_allowed:
 	free_cpumask_var(trial->cpus_allowed);
+	return NULL;
 }
 
 /**
